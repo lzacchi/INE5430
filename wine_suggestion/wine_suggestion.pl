@@ -1,58 +1,74 @@
-acidity(little_acid).
-acidity(medium_acid).
-acidity(acid).
+acidez(baixa).
+acidez(media).
+acidez(alta).
 
-profile(light).
-profile(full_bodied).
-profile(medium_bodied).
+corpo(leve).
+corpo(medio_encorpado).
+corpo(encorpado).
 
-aroma(fruity).
+aroma(frutado).
+aroma(nao_frutado).
 
-dryness(dry).
+tipo(seco).
+tipo(demi_seco).
 
-color(rose).
-color(red).
-color(white).
+cor(rose).
+cor(tinto).
+cor(branco).
 
 
-wine(pn, "Pinot Noir").
-wine(cs, "Cabernet Sauvignon").
-wine(rs, "Riesling").
-wine(cr, "Champagne Rosé").
-wine(rp, "Rosé de Provence").
-wine(cn, "Chianti Novo").
-wine(sb, "Sauvignon Blanc").
-wine(mr, "Merlot").
 wine(bb, "Bordeaux Blanc").
+wine(sb, "Sauvignon Blanc").
+wine(rs, "Riesling").
+wine(rp, "Rosé de Provence").
+wine(pn, "Pinot Noir").
+wine(cn, "Chianti Novo").
 wine(ch, "Chianti Reserva").
+wine(cs, "Cabernet Sauvignon").
+wine(mr, "Merlot").
+wine(cr, "Champagne Rosé").
 
 
-white_meat(pork).
-white_meat(poultry).
-
-red_meat(grilled).
-red_meat(bbq).
-red_meat(with_sauce).
-
-vegetable(eggplant_zuchinni).
-vegetable(delicate_sauce).
-
-pasta(high_fat).
-pasta(tomato).
-pasta(aglio_olio).
-
-fish(smoked).
-fish(fry_bbq).
-fish(steamed).
-
-dessert(chocolate).
-dessert(fruit).
+atributos_vinho(bb, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(branco), tipo(seco), corpo(leve), acidez(media), aroma(nao_frutado) !.
+atributos_vinho(sb, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(branco), tipo(seco), corpo(leve), acidez(alta), aroma(nao_frutado) !.
+atributos_vinho(rs, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(branco), tipo(demi_seco), corpo(leve), acidez(baixa), aroma(frutado) !.
+atributos_vinho(rp, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(rose), tipo(demi_seco), corpo(leve), acidez(baixa), aroma(frutado) !.
+atributos_vinho(pn, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(tinto), tipo(seco), corpo(encorpado), acidez(media), aroma(nao_frutado) !.
+atributos_vinho(cn, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(tinto), tipo(seco), corpo(medio_encorpado), acidez(media), aroma(nao_frutado) !.
+atributos_vinho(ch, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(tinto), tipo(seco), corpo(encorpado), acidez(baixa), aroma(nao_frutado) !.
+atributos_vinho(cs, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(tinto), tipo(seco), corpo(encorpado), acidez(alta), aroma(nao_frutado) !.
+atributos_vinho(mr, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(tinto), tipo(seco), corpo(medio_encorpado), acidez(media), aroma(nao_frutado) !.
+atributos_vinho(cr, Cor, Tipo, Corpo, Acidez, Aroma) :- cor(rose), tipo(seco), corpo(leve), acidez(baixa), aroma(frutado) !.
 
 
-plate(red_meat).
-plate(fish).
-plate(pasta).
-plate(dessert).
+carne_branca(porco).
+carne_branca(aves).
+
+carne_vermelha(grelhada).
+carne_vermelha(assada).
+carne_vermelha(com_molho).
+
+legume(beringela_abobrinha).
+legume(molho_delicado).
+
+massa(mais_gorduroso).
+massa(tomato).
+massa(aglio_olio).
+
+peixe(defumado).
+peixe(frito_assado).
+peixe(vapor).
+
+sobremesa(chocolate).
+sobremesa(fruta).
+
+
+prato(carne_branca).
+prato(carne_vermelha).
+prato(peixe).
+prato(pasta).
+prato(sobremesa).
+prato(legumes).
 
 
 
@@ -64,6 +80,7 @@ plate(dessert).
 %     ENTÃO cor vinho = Branco CNF 100%
 %           tipo vinho = Seco CNF 100%
 %           corpo do vinho = leve CNF 100%
+sugestao(Vinho, Carne, Bulhufas ) :-  atributos_vinho(Vinho,cor,tipo,corpo, _,_,_ ), carne(carne).
 
 %   Regra 2
 %     SE tipo prato = Peixes e frutos do Mar
@@ -129,9 +146,9 @@ plate(dessert).
 %     ENTÃO cor vinho = Tinto CNF 100%
 %           acidez do vinho = médio ácido CNF 100%
 
-acidity(medium_acid) :-
-    plate(red_meat),
-    red_mead(grilled).
+acidez(media) :-
+    prato(carne_vermelha),
+    red_mead(grelhada).
 
 %   Regra 11
 %     SE tipo prato = Carne vermelha
@@ -140,6 +157,8 @@ acidity(medium_acid) :-
 %     ENTÃO tipo vinho = Seco CNF 100%
 %           cor vinho = Tinto CNF 100%
 %           corpo do vinho = encorpado CNF 100%
+sugestao(Vinho, carne_vermelha, (assada; com_molho)) :-  atributos_vinho(Vinho, cor(tinto), tipo(seco), corpo(encorpado), _, _ ).
+sugestao(vinho, CARNE, TIPOS) :- atributos_vinho( Vinho, cor(), tipo(), corpo(), acidez(), aroma()).
 
 %   Regra 12
 %     SE tipo prato = Sobremesas
@@ -160,9 +179,9 @@ acidity(medium_acid) :-
 %     E  corpo do vinho = leve
 %     ENTÃO Sugestão de vinho = Merlot CNF 100%
 wine(mr) :-
-    color(red),
-    dryness(dry),
-    profile(leve).
+    cor(tinto),
+    tipo(seco),
+    corpo(leve).
 
 %   Regra 15
 %     SE cor vinho = Branco
@@ -170,9 +189,9 @@ wine(mr) :-
 %     E  corpo do vinho = médio encorpado
 %     ENTÃO Sugestão de vinho = Sauvignon Blanc CNF 100%
 wine(sb) :-
-    color(white),
-    dryness(dry),
-    profile(medio).
+    cor(branco),
+    tipo(seco),
+    corpo(medio).
 
 %   Regra 16
 %     SE cor vinho = Tinto
@@ -202,9 +221,9 @@ wine(sb) :-
 %     E  acidez do vinho = ácido
 %     ENTÃO Sugestão de vinho = Sauvignon Blanc CNF 100%
 wine(sb) :-
-    color(white),
-    dryness(dry),
-    acidity(acid).
+    cor(branco),
+    tipo(seco),
+    acidez(alta).
 
 
 %   Regra 20
@@ -219,22 +238,22 @@ wine(sb) :-
 %     E  acidez do vinho = médio ácido
 %     ENTÃO Sugestão de vinho = Bordeaux blanc  CNF 100%
 wine(bb) :-
-    color(white),
-    dryness(dry),
-    acidity(medium_acid).
+    cor(branco),
+    tipo(seco),
+    acidez(media).
 
 %   Regra 22
 %     SE cor vinho = Rosé
 %     E  aroma vinho = frutado
 %     ENTÃO Sugestão de vinho = Rosé de Provence  CNF 100%
 wine(rp) :-
-    color(rose),
-    aroma(fruity).
+    cor(rose),
+    aroma(frutado).
 
 %   Regra 23
 %     SE cor vinho = Branco
 %     E  aroma vinho = frutado
 %     ENTÃO Sugestão de vinho = Riesling CNF 100%
 wine(rs) :-
-    color(white),
-    aroma(fruity).
+    cor(branco),
+    aroma(frutado).

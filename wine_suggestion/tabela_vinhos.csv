@@ -1,0 +1,30 @@
+,,,,,,,,,,,,
+Tipos de Vinho,COR,,,TIPO,,CORPO,,,ACIDEZ,,,AROMA
+,Branco ,Rosé ,Tinto,Seco,Demi-Seco,Leve,Médio Encorpado,Encorpado,Baixa,Média ,Alta,Frutado
+,,,,,,,,,,,,
+Bordeaux blanc,X,,,X,,X,,,,X,,N
+Sauvignon Blanc,X,,,X,,X,,,,,X,N
+Riesling ,X,,,,X,X,,,X,,,S
+Rosé de Provence,,X,,,X,X,,,X,,,S
+Pinot Noir ,,,X,X,,,,X,,X,,N
+Chianti novo,,,X,X,,,X,,,X,,N
+Chianti Reserva,,,X,X,,,,X,X,,,N
+Cabernet Sauvignon,,,X,X,,,,X,,,X,N
+Merlot ,,,X,X,,,X,,,X,,N
+Champagne Rosé,,X,,X,,X,,,X,,,N
+,,,,,,,,,,,,
+CARACTERISTICAS,PRATOS,,,,,,,,,,,
+,PEIXES,,,LEGUMES,,MASSAS,,,CARNE BRANCA,CARNE VERMELHA,,SOBREMESA
+,P1,P2,P3,L1,L2,M1,M2,M3,CB1,CV1,CV2,S1
+Branco ,X,X,X,X,,,,,X,,,X
+Rosé ,,X,,,,,,,,,,X
+Tinto,,,,,X,X,X,X,X,X,X,
+Seco,X,X,X,X,X,X,X,X,X,X,X,X
+Demi-Seco,,,,X,,,,,,,,X
+Leve,X,X,X,X,,,,X,X,,,X
+Médio Encorpado,,,,,X,X,X,X,X,X,X,
+Encorpado,,,,,X,X,X,,,X,X,
+Baixa,X,X,,X,,,,,X,,,X
+Média ,X,,X,,X,X,X,X,X,X,,
+Alta,,,X,,,X,X,,,,X,
+Frutado,N,N,N,S,N,N,N,N,N,N,N,S
