@@ -1,3 +1,9 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Construção de Sistema Especialista para recomendar vinhos. %%
+%%  Dupla: Lucas Verdade e Lucas Zacchi.                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
 acidez(baixa).
 acidez(media).
 acidez(alta).
